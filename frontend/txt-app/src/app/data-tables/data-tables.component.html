@@ -1,1 +1,44 @@
 <p>data-tables works!</p>
+
+<table>
+    <thead>
+      <tr>
+        @for (header of headers; track header) {
+          <th>{{ header }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      <tbody>
+        <tr *ngFor="let item of sceny; trackBy: trackByFn">
+          <td *ngFor="let header of headers">
+            @if (header=="characters"){
+              @for(char of item[header]; track char){
+              <td> 
+                <p class="char-name">{{char.name}}</p>
+                <p class="char-emot">{{char.emotions}}</p>
+                <p class="char-goal">{{char.goal}}</p>
+                <p class="char-other">{{char.other}}</p>
+              </td> 
+              }
+            }@else if(header=="date"){
+                  <td> 
+                    <p class="char-name">rok: {{item[header].year}}</p>
+                    <p class="char-emot">miesiąc: {{item[header].month}}</p>
+                    <p class="char-goal">dzień: {{item[header].day}}</p>
+                    <p class="char-other">godzina: {{item[header].hour}}</p>
+                    <p class="char-other">{{item[header].desc}}</p>
+                  </td> 
+                  } @else if(header=="shortDesc"){
+                    <button (click)="toggle()">Pokaż/Ukryj</button>
+                    @if(showhide){
+                      {{item[header]}}
+                    }
+                  }
+            @else{
+            {{ item[header] }}
+          }
+          </td>
+        </tr>
+    </tbody>
+  </table>
