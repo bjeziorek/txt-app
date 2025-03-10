@@ -42,7 +42,13 @@ export type Schema = {
 })  
 export class DataTablesComponent {
   data$ = Observable<any>;
-sceny = sceny;
+sceny = sceny.sort((a, b) => {
+  if (a.date.year !== b.date.year) return a.date.year - b.date.year;
+  if (a.date.month !== b.date.month) return a.date.month - b.date.month;
+  if (a.date.day !== b.date.day) return a.date.day - b.date.day;
+  if (a.date.hour !== b.date.hour) return a.date.hour - b.date.hour;
+  return 0;
+});
 
 public showhide = true;
 

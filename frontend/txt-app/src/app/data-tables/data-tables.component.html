@@ -23,11 +23,11 @@
               }
             }@else if(header=="date"){
                   <td> 
-                    <p class="char-name">rok: {{item[header].year}}</p>
-                    <p class="char-emot">miesiąc: {{item[header].month}}</p>
-                    <p class="char-goal">dzień: {{item[header].day}}</p>
-                    <p class="char-other">godzina: {{item[header].hour}}</p>
-                    <p class="char-other">{{item[header].desc}}</p>
+                    <p class="char-name"> {{item[header].day}}.{{item[header].month}}.{{item[header].year}}, {{item[header].hour}}:00</p>
+                    @if(showhide){
+                       <p class="char-other">{{item[header].desc}}</p>
+                    }
+                   
                   </td> 
                   } @else if(header=="shortDesc"){
                     <button (click)="toggle()">Pokaż/Ukryj</button>
