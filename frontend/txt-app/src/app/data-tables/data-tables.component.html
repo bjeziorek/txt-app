@@ -4,8 +4,17 @@
     <thead>
       <tr>
         @for (header of headers; track header) {
+          @if(header=='nr'){
+            nr+pov
+          }
+          <!-- nie mogę wykluczyć tego headera, bo mi się przesuwają kolumny -->
+          <!-- @else if(header=='pov'){} -->
+          @else {
           <th>{{ header }}</th>
+          }
+          <!-- <th>{{ header }}</th> -->
         }
+        
       </tr>
     </thead>
     <tbody>
@@ -36,7 +45,13 @@
                     }
                   }
             @else{
+              @if(header=='nr'){
+                {{item['nr']}} - {{item['pov']}}
+               }
+               @else if(header=='pov'){}
+               @else{
             {{ item[header] }}
+               }
           }
           </td>
         </tr>
