@@ -23,6 +23,7 @@ type DateKryst = {
 
 export type Schema = {
   "nr": number,
+  "idMalformation"? :string,
   "descTitle":string,
   "shortDesc":string,
   "date":DateKryst,
