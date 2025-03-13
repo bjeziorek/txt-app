@@ -3,37 +3,7 @@ import { ApiService } from '../api.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common'
 import { sceny } from '../data';
-
-
-type Char = {
-  name:string,
-  emotions:string,
-  goal:string,
-  other:string[]
-}
-
-type DateKryst = {
-  year:number,
-  month:number,
-  day:number,
-  hour:number,
-  desc:string,
-  [key: string]: any;
-}
-
-export type Schema = {
-  "nr": number,
-  "idMalformation"? :string,
-  "descTitle":string,
-  "shortDesc":string,
-  "date":DateKryst,
-  "characters":Char[],
-  "pov":string,
-  "place":string[],
-  "didascalia":string,
-  "remarks":string,
-   [key: string]: any;
-};
+import { Schema } from '../txt.model';
 
 @Component({
   selector: 'app-data-tables',
