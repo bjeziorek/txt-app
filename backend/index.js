@@ -6,6 +6,7 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 const jsonFilePath = './data/data.json';
+let jsonData = null;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,19 +17,32 @@ app.get('/data', (req, res) => {
     if (err) {
       return res.status(500).send('Error reading file');
     }
-    res.send(JSON.parse(data));
+    jsonData = JSON.parse(data);
+    res.send(jsonData);
   });
 });
 
+app.post('/data/scene/id-pov', (req,res) => {
+  const data = JSON.stringify(req.body, null, 2)
+  console.log('serwer: otrzymano scenę:', data)
+  // coś mi tu nie działa, serwer nie mówi, że coś dostał i nie potwierdza frontowi
+  // przyjrzeć się temu
+  res.send('serwer: otrzymano scenę');
+})
+
 // Endpoint do zapisu zmian w pliku JSON
 app.post('/data', (req, res) => {
+  saveJson(req,res);
+});
+
+function saveJson(){
   fs.writeFile(jsonFilePath, JSON.stringify(req.body, null, 2), 'utf8', (err) => {
     if (err) {
       return res.status(500).send('Error writing file');
     }
     res.send('File updated successfully');
   });
-});
+}
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

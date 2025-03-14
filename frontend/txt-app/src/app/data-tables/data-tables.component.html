@@ -39,6 +39,7 @@
                    
                   </td> 
                   } @else if(header=="shortDesc"){
+                    <button (click)="testSendScene(item)">testSendScene</button>
                     <button (click)="toggle()">Pokaż/Ukryj</button>
                     @if(showhide){
                       {{item[header]}}

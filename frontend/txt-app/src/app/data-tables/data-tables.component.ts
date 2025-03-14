@@ -27,6 +27,11 @@ public showhide = true;
   this.showhide=!this.showhide;
  }
 
+  testSendScene(item:Schema){
+    console.log('testSendScene:item',item)
+    this.api.updateSceneById(item)
+  }
+
   get headers() {
     return Object.keys(sceny[0]);
   }
