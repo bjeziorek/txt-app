@@ -13,13 +13,19 @@ import { Schema } from '../txt.model';
 })  
 export class DataTablesComponent {
   data$ = Observable<any>;
-sceny = sceny.sort((a, b) => {
+scenes = sceny.sort((a, b) => {
   if (a.date.year !== b.date.year) return a.date.year - b.date.year;
   if (a.date.month !== b.date.month) return a.date.month - b.date.month;
   if (a.date.day !== b.date.day) return a.date.day - b.date.day;
   if (a.date.hour !== b.date.hour) return a.date.hour - b.date.hour;
   return 0;
 });
+
+filterScenesByCharacter(character: string){
+  console.log(this.scenes.length, this.scenes)
+  this.scenes=sceny.filter(scene => scene.characters.filter(char=>char.name===character).length>0)
+  console.log(this.scenes.length, this.scenes)
+}
 
 public showhide = true;
 
@@ -40,9 +46,7 @@ public showhide = true;
     return item.nr;
   }
  
-
   constructor(private api: ApiService) { }
-
 
 
   ngOnInit(): void {

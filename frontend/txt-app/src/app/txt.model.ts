@@ -1,4 +1,4 @@
-type Char = {
+export type Char = {
   name:string,
   emotions:string,
   goal:string,

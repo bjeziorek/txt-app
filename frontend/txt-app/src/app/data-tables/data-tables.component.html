@@ -1,5 +1,8 @@
 <p>data-tables works!</p>
 
+<button (click)="filterScenesByCharacter('Tis')">Tis</button>
+<button (click)="filterScenesByCharacter('Morion')">Morion</button>
+
 <table>
     <thead>
       <tr>
@@ -19,7 +22,7 @@
     </thead>
     <tbody>
       <tbody>
-        <tr *ngFor="let item of sceny; trackBy: trackByFn">
+        <tr *ngFor="let item of scenes; trackBy: trackByFn">
           <td *ngFor="let header of headers">
             @if (header=="characters"){
               @for(char of item[header]; track char){
