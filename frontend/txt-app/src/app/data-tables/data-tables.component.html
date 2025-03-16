@@ -1,7 +1,9 @@
 <p>data-tables works!</p>
 
-<button (click)="filterScenesByCharacter('Tis')">Tis</button>
-<button (click)="filterScenesByCharacter('Morion')">Morion</button>
+@for(char of characters; track char){
+  <button (click)="filterScenesByCharacter(char)">{{char}}</button>
+}
+<button (click)="filterScenesByCharacter('')">ALL</button>
 
 <table>
     <thead>

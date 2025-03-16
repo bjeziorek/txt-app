@@ -5,6 +5,12 @@ import { CommonModule } from '@angular/common'
 import { sceny } from '../data';
 import { Schema } from '../txt.model';
 
+enum MyEnum {
+  A = "A",
+  B = "B",
+  C = "C"
+}
+
 @Component({
   selector: 'app-data-tables',
   imports: [CommonModule],
@@ -12,6 +18,9 @@ import { Schema } from '../txt.model';
   styleUrl: './data-tables.component.css'
 })  
 export class DataTablesComponent {
+  public characters:string[]=[];
+  example: MyEnum = MyEnum.A;
+
   data$ = Observable<any>;
 scenes = sceny.sort((a, b) => {
   if (a.date.year !== b.date.year) return a.date.year - b.date.year;
@@ -22,6 +31,10 @@ scenes = sceny.sort((a, b) => {
 });
 
 filterScenesByCharacter(character: string){
+  if(character===''){
+    this.scenes=sceny;
+    return;
+  }
   console.log(this.scenes.length, this.scenes)
   this.scenes=sceny.filter(scene => scene.characters.filter(char=>char.name===character).length>0)
   console.log(this.scenes.length, this.scenes)
@@ -31,6 +44,9 @@ public showhide = true;
 
  toggle(){
   this.showhide=!this.showhide;
+
+  this.example = MyEnum.B
+
  }
 
   testSendScene(item:Schema){
@@ -46,7 +62,23 @@ public showhide = true;
     return item.nr;
   }
  
-  constructor(private api: ApiService) { }
+  generateCharacterEnum(data: Schema[]){
+    // const uniqueNames = Array.from(new Set(data.map(item => item.characters.name)));
+  
+    const uniqueNames = Array.from(
+      new Set(
+        data.flatMap(item => item.characters.map(character => character.name))
+      )
+    );
+  
+  console.log(uniqueNames);
+  return uniqueNames;
+  }
+
+  constructor(private api: ApiService) { 
+    this.characters=this.generateCharacterEnum(sceny);
+
+  }
 
 
   ngOnInit(): void {
