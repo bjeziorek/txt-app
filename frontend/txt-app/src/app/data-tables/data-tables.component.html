@@ -1,9 +1,25 @@
 <p>data-tables works!</p>
 
-@for(char of characters; track char){
-  <button (click)="filterScenesByCharacter(char)">{{char}}</button>
+<div>
+  <label>
+    <input type="radio" name="filterMode" [(ngModel)]="filterMode" (change)="onFilterModeChange()" value="Suma" />
+    Suma
+  </label>
+  <label>
+    <input type="radio" name="filterMode" [(ngModel)]="filterMode" (change)="onFilterModeChange()" value="Mnożenie" />
+    Mnożenie
+  </label>
+</div>
+
+<p>Wybrana opcja: {{ filterMode }}</p>
+
+@for(filter of filters; track filter){
+  <button 
+    [ngClass]="{ 'filter-on': filter.filter, 'filter-off': !filter.filter }"
+    (click)="filterScenesByCharacter(filter.character)">{{filter.character}}
+  </button>
 }
-<button (click)="filterScenesByCharacter('')">ALL</button>
+<button (click)="filterScenesByCharacter('ALL')">ALL</button>
 
 <table>
     <thead>
@@ -29,7 +45,7 @@
             @if (header=="characters"){
               @for(char of item[header]; track char){
               <td> 
-                <p class="char-name">{{char.name}}</p>
+                <p class="char-name" [ngClass]="{ 'filtered': isFilterOnForChar(char.name)}">{{char.name}}</p>
                 <p class="char-emot">{{char.emotions}}</p>
                 <p class="char-goal">{{char.goal}}</p>
                 <p class="char-other">{{char.other}}</p>

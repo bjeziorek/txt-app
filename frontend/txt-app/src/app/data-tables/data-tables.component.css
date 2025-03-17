@@ -10,3 +10,15 @@
 .char-other{
     color: rgb(89, 0, 255);
 }
+
+.filter-on{
+    color:green;
+}
+
+.filter-off{
+    color:red;
+}
+
+.filtered{
+    border: 2px lightsalmon solid;
+}
