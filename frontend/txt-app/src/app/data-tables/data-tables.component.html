@@ -2,16 +2,16 @@
 
 <div>
   <label>
-    <input type="radio" name="filterMode" [(ngModel)]="filterMode" (change)="onFilterModeChange()" value="Suma" />
-    Suma
+    <input type="radio" name="filterMode" [(ngModel)]="filterMode" (change)="onFilterModeChange()" value="AnyPresent" />
+    All scenes where any character is present
   </label>
   <label>
-    <input type="radio" name="filterMode" [(ngModel)]="filterMode" (change)="onFilterModeChange()" value="Mnożenie" />
-    Mnożenie
+    <input type="radio" name="filterMode" [(ngModel)]="filterMode" (change)="onFilterModeChange()" value="AllPresent" />
+    All scenes where all characters are present
   </label>
 </div>
 
-<p>Wybrana opcja: {{ filterMode }}</p>
+<p>Mode: {{ filterMode }}</p>
 
 @for(filter of filters; track filter){
   <button 
@@ -19,7 +19,16 @@
     (click)="filterScenesByCharacter(filter.character)">{{filter.character}}
   </button>
 }
-<button (click)="filterScenesByCharacter('ALL')">WSZYSTKIE</button>
+<button (click)="filterScenesByCharacter('ALL')">All</button>
+
+<p>Columns (todo):</p>
+
+@for(column of columns; track column){
+  <button 
+  (click)="setIsColumnActive(column.col)"
+  [ngClass]="{ 'filter-on': column.isVisible, 'filter-off': !column.isVisible }"
+  >{{column.col}}</button>
+}
 
 <table>
     <thead>

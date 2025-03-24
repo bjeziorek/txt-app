@@ -7,8 +7,8 @@ import { Schema } from '../txt.model';
 import { FormsModule } from '@angular/forms';
 
 enum FilterModes {
-  Suma = "Suma",
-  Mnożenie = "Mnożenie",
+  AnyPresent = "AnyPresent",
+  AllPresent = "AllPresent",
 }
 
 @Component({
@@ -19,85 +19,41 @@ enum FilterModes {
 })  
 export class DataTablesComponent {
 
-onFilterModeChange() {
-  this.filterScenesByCharacter('')
-}
-  public characters:string[]=[];
-  public filters:{character:string;filter:boolean}[]=[];
-  public filterMode:FilterModes=FilterModes.Suma
-
   data$ = Observable<any>;
-scenes = sceny.sort((a, b) => {
-  if (a.date.year !== b.date.year) return a.date.year - b.date.year;
-  if (a.date.month !== b.date.month) return a.date.month - b.date.month;
-  if (a.date.day !== b.date.day) return a.date.day - b.date.day;
-  if (a.date.hour !== b.date.hour) return a.date.hour - b.date.hour;
-  return 0;
-});
+  scenes = sceny.sort((a, b) => {
+    if (a.date.year !== b.date.year) return a.date.year - b.date.year;
+    if (a.date.month !== b.date.month) return a.date.month - b.date.month;
+    if (a.date.day !== b.date.day) return a.date.day - b.date.day;
+    if (a.date.hour !== b.date.hour) return a.date.hour - b.date.hour;
+    return 0;
+  });
 
-isFilterOnForChar(name:string){
-  const z=this.filters.filter(filter=>filter.character && filter.filter).map(el=>el.character).includes(name)
-  return z
-}
+  extractColumns(){
+    // todo - rewrite it to self generating
+    return [
+      {col:"nr", isVisible: true},
+      {col:"sceneIntensity", isVisible: true},
+      {col:"idMalformation", isVisible: true},
+      {col:"descTitle", isVisible: true},
+      {col:"shortDesc", isVisible: true},
+      {col:"date", isVisible: true},
+      {col:"characters", isVisible: true},
+      {col:"place", isVisible: true},
+      {col:"didascalia", isVisible: true},
+      {col:"remarks", isVisible: true},
+    ]
+  }
 
-filterScenesByCharacter(character: string){
-  this.filters = this.filters.map(
-    filter=>{
-      if( filter.character==character){
-        return {character, filter:!filter.filter}
-      }else{
-        return filter
-      }
-    })
-
-  const filtersOn = this.filters.filter(filter=>filter.filter).map(el=>el.character)
-  this.polaczTablice(  sceny.filter(scene => 
-    filtersOn.some(filter => 
-      scene.characters.some(character => character.name === filter)
-    )
-  ))
-
-
-  if(character==='ALL'){
-    this.scenes=sceny;
-    this.filters = this.filters.map(filter=>{
+  extractAllCharactersFromScenes(){
+    return this.filters.map(filter=>{
       return {
         character:filter.character,
         filter:false
       }
   });
-    return;
   }
 
-  const sceneList: any[] = []
-
-  filtersOn.forEach(filter=>{
-    sceneList.push(
-      sceny.filter(scene => scene.characters.filter(char=>char.name===filter).length>0)
-    )
-  })
-
-
-  switch(this.filterMode){
-    case FilterModes.Suma:
-    this.scenes=sceny.filter(scene => scene.characters.filter(char=>char.name===character).length>0)
-    this.scenes=sceneList.flat();
-    break;
-    case FilterModes.Mnożenie:
-      this.scenes=sceny.filter(scene => 
-        filtersOn.every(filter=>scene.characters.some(char=>char.name===filter)))
-    break;
-    default:
-      console.error('nieznany filter mode:', this.filterMode)
-  }
-}
-
-public showhide = true;
-
- toggle(){
-  this.showhide=!this.showhide;
- }
-
+  
  polaczTablice(...tablice: Schema[][]): Schema[] {
   return [
     ...new Map(
@@ -107,6 +63,101 @@ public showhide = true;
     ).values()
   ];
 };
+
+
+  filterScenesByCharacter(character: string){
+    this.filters = this.filters.map(
+      filter=>{
+        if( filter.character==character){
+          return {character, filter:!filter.filter}
+        }else{
+          return filter
+        }
+      })
+  
+    const filtersOn = this.filters.filter(filter=>filter.filter).map(el=>el.character)
+    this.polaczTablice(  sceny.filter(scene => 
+      filtersOn.some(filter => 
+        scene.characters.some(character => character.name === filter)
+      )
+    ))
+  
+  
+    if(character==='ALL'){
+      this.scenes=sceny;
+      this.filters = this.extractAllCharactersFromScenes();
+      return;
+    }
+  
+    const sceneList: any[] = []
+  
+    filtersOn.forEach(filter=>{
+      sceneList.push(
+        sceny.filter(scene => scene.characters.filter(char=>char.name===filter).length>0)
+      )
+    })
+  
+  
+    switch(this.filterMode){
+      case FilterModes.AnyPresent:
+      this.scenes=sceny.filter(scene => scene.characters.filter(char=>char.name===character).length>0)
+      this.scenes=sceneList.flat();
+      break;
+      case FilterModes.AllPresent:
+        this.scenes=sceny.filter(scene => 
+          filtersOn.every(filter=>scene.characters.some(char=>char.name===filter)))
+      break;
+      default:
+        console.error('nieznany filter mode:', this.filterMode)
+    }
+  }
+
+onFilterModeChange() {
+  this.filterScenesByCharacter('')
+}
+  public characters:string[]=[];
+  public filters:{character:string;filter:boolean}[]=[];
+  public columns:{col:string;isVisible:boolean}[]=this.extractColumns();
+  public filterMode:FilterModes=FilterModes.AnyPresent
+
+setIsColumnActive(colName:string) {
+  this.columns = this.columns.map(column=>{
+    if(colName===column.col){
+      return {col:column.col,isVisible:!column.isVisible}
+    }else{
+      return column
+    }
+  })
+  // this.columns=this.columns.map(column=>column.col===colName
+  //   ?colum {column.col, column.isVisible:!col.isVisible}
+  //   :column
+  // )
+  // //throw new Error('Method not implemented.');
+}
+
+ 
+
+isFilterOnForChar(name:string){
+  const z=this.filters.filter(filter=>filter.character && filter.filter).map(el=>el.character).includes(name)
+  return z
+}
+
+
+
+
+
+filterColumns(){
+  // todo
+  
+}
+
+
+
+public showhide = true;
+
+ toggle(){
+  this.showhide=!this.showhide;
+ }
 
   testSendScene(item:Schema){
     this.api.updateSceneById(item)
