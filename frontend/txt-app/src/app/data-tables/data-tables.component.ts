@@ -19,6 +19,14 @@ enum FilterModes {
 })  
 export class DataTablesComponent {
 
+headers=Object.keys(sceny[0]);
+
+
+checkColumnVisibility(colName:string) {
+  return this.columns.find(col=>col.col===colName)?.isVisible
+//throw new Error('Method not implemented.');
+}
+
   data$ = Observable<any>;
   scenes = sceny.sort((a, b) => {
     if (a.date.year !== b.date.year) return a.date.year - b.date.year;
@@ -162,14 +170,6 @@ public showhide = true;
   testSendScene(item:Schema){
     this.api.updateSceneById(item)
   }
-
-  get headers() {
-    return Object.keys(sceny[0]);
-  }
-
-  trackByFn(index: number, item: Schema): number {
-    return item.nr;
-  }
  
   generateCharacterEnum(data: Schema[]){
   
@@ -193,6 +193,7 @@ public showhide = true;
   constructor(private api: ApiService) { 
     this.characters=this.generateCharacterEnum(sceny);
     this.generateCharacterFilters();
+    console.log('headers:',this.headers)
   }
 
 

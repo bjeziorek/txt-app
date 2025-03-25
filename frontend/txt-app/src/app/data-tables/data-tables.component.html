@@ -34,57 +34,57 @@
     <thead>
       <tr>
         @for (header of headers; track header) {
-          @if(header=='nr'){
-            nr+pov
+          @if(checkColumnVisibility(header)){
+            <th>{{ header }}</th>
           }
-          <!-- nie mogę wykluczyć tego headera, bo mi się przesuwają kolumny -->
-          <!-- @else if(header=='pov'){} -->
-          @else {
-          <th>{{ header }}</th>
-          }
-          <!-- <th>{{ header }}</th> -->
         }
         
       </tr>
     </thead>
     <tbody>
       <tbody>
-        <tr *ngFor="let item of scenes; trackBy: trackByFn">
-          <td *ngFor="let header of headers">
-            @if (header=="characters"){
-              @for(char of item[header]; track char){
-              <td> 
-                <p class="char-name" [ngClass]="{ 'filtered': isFilterOnForChar(char.name)}">{{char.name}}</p>
-                <p class="char-emot">{{char.emotions}}</p>
-                <p class="char-goal">{{char.goal}}</p>
-                <p class="char-other">{{char.other}}</p>
-              </td> 
+        @for(item of scenes; track item.nr+item.pov){
+        <tr>
+          @for(header of headers; track header){
+          <td>
+            @if(checkColumnVisibility(header)){
+              @if (header=="characters"){
+                @for(char of item[header]; track char){
+                <td> 
+                  <p class="char-name" [ngClass]="{ 'filtered': isFilterOnForChar(char.name)}">{{char.name}}</p>
+                  <p class="char-emot">{{char.emotions}}</p>
+                  <p class="char-goal">{{char.goal}}</p>
+                  <p class="char-other">{{char.other}}</p>
+                </td> 
+                }
+              }@else if(header=="date"){
+                    <td> 
+                      <p class="char-name"> {{item[header].day}}.{{item[header].month}}.{{item[header].year}}, {{item[header].hour}}:00</p>
+                      @if(showhide){
+                        <p class="char-other">{{item[header].desc}}</p>
+                      }
+                    
+                    </td> 
+                    } @else if(header=="shortDesc"){
+                      <button (click)="testSendScene(item)">testSendScene</button>
+                      <button (click)="toggle()">Pokaż/Ukryj</button>
+                      @if(showhide){
+                        {{item[header]}}
+                      }
+                    }
+              @else{
+                @if(header=='nr'){
+                  {{item['nr']}} - {{item['pov']}}
+                }
+                @else if(header=='pov'){}
+                @else{
+              {{ item[header] }}
+                }
               }
-            }@else if(header=="date"){
-                  <td> 
-                    <p class="char-name"> {{item[header].day}}.{{item[header].month}}.{{item[header].year}}, {{item[header].hour}}:00</p>
-                    @if(showhide){
-                       <p class="char-other">{{item[header].desc}}</p>
-                    }
-                   
-                  </td> 
-                  } @else if(header=="shortDesc"){
-                    <button (click)="testSendScene(item)">testSendScene</button>
-                    <button (click)="toggle()">Pokaż/Ukryj</button>
-                    @if(showhide){
-                      {{item[header]}}
-                    }
-                  }
-            @else{
-              @if(header=='nr'){
-                {{item['nr']}} - {{item['pov']}}
-               }
-               @else if(header=='pov'){}
-               @else{
-            {{ item[header] }}
-               }
-          }
+            }
           </td>
+        }
         </tr>
+      }
     </tbody>
   </table>
