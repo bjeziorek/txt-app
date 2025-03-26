@@ -46,6 +46,7 @@ checkColumnVisibility(colName:string) {
       {col:"shortDesc", isVisible: true},
       {col:"date", isVisible: true},
       {col:"characters", isVisible: true},
+      {col:"pov", isVisible: true},
       {col:"place", isVisible: true},
       {col:"didascalia", isVisible: true},
       {col:"remarks", isVisible: true},
@@ -84,11 +85,11 @@ checkColumnVisibility(colName:string) {
       })
   
     const filtersOn = this.filters.filter(filter=>filter.filter).map(el=>el.character)
-    this.polaczTablice(  sceny.filter(scene => 
-      filtersOn.some(filter => 
-        scene.characters.some(character => character.name === filter)
-      )
-    ))
+    // this.polaczTablice(  sceny.filter(scene => 
+    //   filtersOn.some(filter => 
+    //     scene.characters.some(character => character.name === filter)
+    //   )
+    // ))
   
   
     if(character==='ALL'){
@@ -136,18 +137,12 @@ setIsColumnActive(colName:string) {
       return column
     }
   })
-  // this.columns=this.columns.map(column=>column.col===colName
-  //   ?colum {column.col, column.isVisible:!col.isVisible}
-  //   :column
-  // )
-  // //throw new Error('Method not implemented.');
 }
 
  
 
 isFilterOnForChar(name:string){
-  const z=this.filters.filter(filter=>filter.character && filter.filter).map(el=>el.character).includes(name)
-  return z
+  return this.filters.filter(filter=>filter.character && filter.filter).map(el=>el.character).includes(name)
 }
 
 
