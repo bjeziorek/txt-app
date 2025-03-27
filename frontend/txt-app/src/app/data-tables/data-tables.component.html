@@ -46,8 +46,9 @@
         @for(item of scenes; track item.nr+item.pov){
         <tr>
           @for(header of headers; track header){
-          <td>
             @if(checkColumnVisibility(header)){
+             <td>
+            
               @if (header=="characters"){
                 @for(char of item[header]; track char){
                 <td> 
@@ -81,8 +82,9 @@
               {{ item[header] }}
                 }
               }
-            }
+           
           </td>
+           }
         }
         </tr>
       }
