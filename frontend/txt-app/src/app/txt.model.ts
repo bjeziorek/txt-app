@@ -1,5 +1,8 @@
+type CharacterPresence = 'present' | 'mentioned';
+
 export type Char = {
   name:string,
+  presence:CharacterPresence,
   emotions:string,
   goal:string,
   other:string[]

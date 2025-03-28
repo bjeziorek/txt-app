@@ -12,10 +12,10 @@ enum FilterModes {
 }
 
 @Component({
-  selector: 'app-data-tables',
+  selector: 'metadata-tables',
   imports: [CommonModule, FormsModule],
-  templateUrl: './data-tables.component.html',
-  styleUrl: './data-tables.component.css'
+  templateUrl: './metadata-tables.component.html',
+  styleUrl: './metadata-tables.component.css'
 })  
 export class DataTablesComponent {
 
@@ -163,7 +163,9 @@ public showhide = true;
  }
 
   testSendScene(item:Schema){
-    this.api.updateSceneById(item)
+    // this.api.updateSceneById(item)
+    this.api.sendTestData(item)
+    
   }
  
   generateCharacterEnum(data: Schema[]){

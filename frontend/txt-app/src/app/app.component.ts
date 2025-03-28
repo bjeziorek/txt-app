@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DataTablesComponent } from "./data-tables/data-tables.component";
+import { DataTablesComponent } from "./data-tables/metadata-tables.component";
+import { MenuComponent } from './menu/menu.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, DataTablesComponent],
+  imports: [RouterOutlet, DataTablesComponent, MenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'txt-app';
+  title = 'Krystalik'
 }

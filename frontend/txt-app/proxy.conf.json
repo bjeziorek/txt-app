@@ -2,5 +2,10 @@
     "/data": {
       "target": "http://localhost:3000",
       "secure": false
+    },
+    "/translations": {
+        "target": "http://localhost:4200",
+        "secure": false,
+        "bypass": true
     }
 }

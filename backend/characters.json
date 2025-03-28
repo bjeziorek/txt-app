@@ -1,0 +1,67 @@
+{
+  "message": {
+    "nr": 94,
+    "descTitle": "Feng, przesłuchanie Orena",
+    "shortDesc": "Z Fengiem o humorkach Tisa, zastanawiają się gdzie polazł. Feng każde Magazynowemu zgodnie z procedurami założyć Orenowi kaptur. Feng pyta o Rh'inna, Oren dźga do Moriona, że poluja na brata, obrywa od Fenga, Oren dźga do Fenga, że słabo, Feng poprawia, Oren odpuszcza, Feng znowu pyta o Rh'inna, Oren mówi, że Morion wie, Feng go pyta przez System, Morion mówi, że miał jechać do Maluma i tyle wie, Feng pyta po raz trzeci, Oren mówi, że miał jechać do stolicy, nie mówi, że do Maluma. Feng chce, żeby padło imię Maluma, więc pyta o Zirena (Morion zdziwiony skąd wie o Zirenie - no właśnie, skąd?), Oren mówi, że nie ma nic wspólnego z Zirenem, a słysząc groźbę odpowiada, że Ziren czasem go śledzi i tyle, Feng nie wierzy, pyta o protezy, Oren kłamie, że są dendryjski w wykonaniu Misyta. Tis pisze do Moriona co robi w Sekcji Magazynowej, twierdzi że trzeba spr czy K2 nie zranił Moriona, a potem każe Magazynowemu go zabrać. Morion jest zabrany do Sekcji Medycznej, Tis się nie pojawia, jak Morion mówi, że czuje się dobrze to dostaje zdolność do pracy. Morion prosi go o przepustę do Sekcji Naukowej, bez słowa dostaje, pyta B70 o Tisa, a ten mówi, że przestał się w ogóle interesować K2-ką (teraz się chyba przenoszeniem U zajmuje oraz rozmowami z Zu)",
+    "date": {
+      "year": 71,
+      "month": 3,
+      "day": 13,
+      "hour": 18,
+      "desc": "13 rok wojny, dzień (12) lub dwa (13) po pojmaniu Orena"
+    },
+    "characters": [
+      {
+        "name": "Morion",
+        "presence": "present",
+        "emotions": "zaskoczenie stanem Orena",
+        "goal": "zorientować się w sytuacji",
+        "other": [
+          "resztki przeziębienia, ma rękę Orena z lekką obudową"
+        ]
+      },
+      {
+        "name": "Oren",
+        "presence": "present",
+        "emotions": "determinacja",
+        "goal": "żeby nie wyjść słabo",
+        "other": [
+          ""
+        ]
+      },
+      {
+        "name": "Feng",
+        "presence": "present",
+        "emotions": "determinacja",
+        "goal": "przesłuchać Orena",
+        "other": [
+          ""
+        ]
+      },
+      {
+        "name": "Magazynowy",
+        "presence": "present",
+        "emotions": "znudzenie",
+        "goal": "wymigać się od roboty",
+        "other": [
+          ""
+        ]
+      },
+      {
+        "name": "Tis",
+        "presence": "present",
+        "emotions": "urażony",
+        "goal": "poukładać sobie emocje",
+        "other": [
+          ""
+        ]
+      }
+    ],
+    "pov": "Morion",
+    "place": [
+      "Sekcja Naukowa, Magazynowa, Medyczna, Naukowa"
+    ],
+    "didascalia": "?",
+    "remarks": "czemu Morion dziwi się bliznami starymi Orena, jak przecież dopiero co go widział? Czemu jeniec nie ma kaptura? A, bo Magazynowy dopiero o to pyta, bo wcześniej nie przygotował, Feng powinien go opierprzyć za nietrzymanie sie procedur. Oren jakoś powinien zareagować na rękę Moriona. (Oren nie miał kaptura, bo pewnie Miingzhu mi w Sekcji Medycznej ściagnęła chociaż na chwilę, żeby go nie obcierał iżeby go zbadać... nie wiem, może)"
+  }
+}

@@ -1,0 +1,9 @@
+<p>menu works!</p>
+<button (click)="setLang('en')">{{'MENU.ENGLISH'|translate}}</button>
+<button (click)="setLang('pl')">{{'MENU.POLISH'|translate}}</button>
+<button>{{'MENU.NEW_PROJECT'|translate}}</button>
+<button>{{'MENU.OPEN'|translate}}</button>
+<p>{{'MENU.LIST'|translate}}:</p>
+@for(project of projects; track project){
+    <button>{{project}}</button>
+}
