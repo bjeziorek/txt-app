@@ -1,5 +1,6 @@
-import express, {Request, Response} from "express";
+import { saveFile } from "./utils/crud";
 
+const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
@@ -13,8 +14,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Endpoint do odczytu pliku JSON
-app.get('/data', (req: Request, res:Response):void => {
-  console.log('data')
+app.get('/data', (req: any, res:any):void => {
+  console.log('data',saveFile('a','b','c.txt',{a:'asasas',v:47584}))
   fs.readFile(jsonFilePath, 'utf8', (err: NodeJS.ErrnoException | null, data: string) => {
     if (err) {
       return res.status(500).send('Error reading file');
@@ -24,13 +25,13 @@ app.get('/data', (req: Request, res:Response):void => {
   });
 });
 
-app.post('/test', (req,res) => {
+app.post('/test', (req:any,res:any) => {
   console.log('wejscie do test',req)
  
   res.send('serwer: otrzymano test');
 })
 
-app.post('/api/endpoint', (req, res) => {
+app.post('/api/endpoint', (req:any, res:any) => {
   console.log('Received data:', req.body);
   console.log('Received characters:', JSON.stringify(req.body, null, 2)); // Czytelne logowanie
  // res.json({ message: 'Data received successfully!' });
@@ -48,7 +49,7 @@ app.post('/api/endpoint', (req, res) => {
 
 });
 
-app.post('/data/scene/id-pov', (req:Request,res:Response) => {
+app.post('/data/scene/id-pov', (req:any,res:any) => {
   console.log('wejscie do id-pov')
   const data = JSON.stringify(req.body, null, 2)
   console.log('serwer: otrzymano scenę:', data)
@@ -58,11 +59,11 @@ app.post('/data/scene/id-pov', (req:Request,res:Response) => {
 })
 
 // Endpoint do zapisu zmian w pliku JSON
-app.post('/data', (req, res) => {
+app.post('/data', (req:any, res:any) => {
   saveJson(req,res);
 });
 
-function saveJson(req: Request, res: Response){
+function saveJson(req: any, res: any){
   fs.writeFile(jsonFilePath, JSON.stringify(req.body, null, 2), 'utf8', (err:NodeJS.ErrnoException | null) => {
     if (err) {
       return res.status(500).send('Error writing file');
