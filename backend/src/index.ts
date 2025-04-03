@@ -1,4 +1,5 @@
 import { saveFile } from "./utils/crud";
+import { emptyTemplate, novelTemplate } from "./utils/fileTemplates";
 
 const express = require('express')
 const bodyParser = require('body-parser');
@@ -16,6 +17,8 @@ app.use(bodyParser.json());
 // Endpoint do odczytu pliku JSON
 app.get('/data', (req: any, res:any):void => {
   console.log('data',saveFile('a','b','c.txt',{a:'asasas',v:47584}))
+  console.log('empty',novelTemplate.generate('powieść_abc'))
+  console.log('novel',emptyTemplate.generate('pusty2'))
   fs.readFile(jsonFilePath, 'utf8', (err: NodeJS.ErrnoException | null, data: string) => {
     if (err) {
       return res.status(500).send('Error reading file');
