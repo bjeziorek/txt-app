@@ -14,15 +14,6 @@ export class TranslationService {
     this.loadTranslations('pl');
   }
 
-  //   loadTranslations(lang: string) {
-  //     console.log('---- in loadtranst')
-  // //    const url = `./assets/translations/${lang}.properties`;
-  //   const url = `translations/${lang}.properties`;
-  //   this.http.get(url, { responseType: 'text' }).subscribe((data) => {
-  //     this.translations = this.parseProperties(data);
-  //     console.log('---',this.translations)
-  //   });
-  // }
   loadTranslations(lang: string): void {
     const url = `translations/${lang}.properties`;
     this.http.get(url, { responseType: 'text' }).subscribe({
@@ -37,8 +28,8 @@ export class TranslationService {
   }
 
   translate(key: string): string {
-    const currentTranslations = this.translations.getValue(); // Pobierz aktualne tłumaczenia
-    return currentTranslations[key] || key; // Zwróć tłumaczenie lub klucz jako fallback
+    const currentTranslations = this.translations.getValue(); 
+    return currentTranslations[key] || key; 
   }
 
   private parseProperties(data: string): Record<string, string> {
@@ -52,35 +43,4 @@ export class TranslationService {
     });
     return result;
   }
-
-  // loadTranslations(lang: string): void {
-  //   const url = `translations/${lang}.properties`;
-  //   this.http.get(url, { responseType: 'text' }).subscribe({
-  //     next: (data) => {
-  //       console.log('raw data',data)
-  //       this.translations = this.parseProperties(data);
-  //       console.log('Translations updated:', this.translations);
-  //     },
-  //     error: (err) => {
-  //       console.error('Error loading translations:', err);
-  //     },
-  //   });
-  // }
-
-  // translate(key: string): string {
-  //   console.log('translate service',key)
-  //   return this.translations[key] || key;
-  // }
-
-  // private parseProperties(data: string): Record<string, string> {
-  //   const lines = data.split('\n');
-  //   const result: Record<string, string> = {};
-  //   lines.forEach((line) => {
-  //     const [key, value] = line.split('=');
-  //     if (key && value) {
-  //       result[key.trim()] = value.trim();
-  //     }
-  //   });
-  //   return result;
-  // }
 }

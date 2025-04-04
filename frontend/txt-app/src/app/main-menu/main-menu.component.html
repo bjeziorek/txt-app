@@ -1,0 +1,19 @@
+<p>main-menu works!</p>
+
+<button (click)="setTab('text')">{{'MENU.TEXT' | translate }}</button>
+<button (click)="setTab('characters')">{{'MENU.CHARACTERS' | translate }}</button>
+<button (click)="setTab('events')">{{'MENU.EVENTS' | translate }}</button>
+<button (click)="setTab('scenes')">{{'MENU.SCENES' | translate }}</button>
+
+@if(currentTab==="text"){
+    <app-scene></app-scene>
+}
+@if(currentTab==="characters"){
+    <p>characters</p>
+}
+@if(currentTab==="events"){
+    <p>eventy</p>
+}
+@if(currentTab==="scenes"){
+    <metadata-tables></metadata-tables>
+}
