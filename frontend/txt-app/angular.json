@@ -26,6 +26,7 @@
                 "input": "public"
               }
             ],
+            "outputHashing": "all",
             "styles": [
               "src/styles.css"
             ],

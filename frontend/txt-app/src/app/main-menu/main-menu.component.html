@@ -4,6 +4,9 @@
 <button (click)="setTab('characters')">{{'MENU.CHARACTERS' | translate }}</button>
 <button (click)="setTab('events')">{{'MENU.EVENTS' | translate }}</button>
 <button (click)="setTab('scenes')">{{'MENU.SCENES' | translate }}</button>
+<button (click)="setTab('idea')">{{'MENU.IDEAS'|translate }}</button>
+<button>{{'MENU.POLISH'|translate}}</button>
+
 
 @if(currentTab==="text"){
     <app-scene></app-scene>
@@ -15,5 +18,10 @@
     <p>eventy</p>
 }
 @if(currentTab==="scenes"){
+    <button (click)="setTab('ideaa')">{{'MENU.SCENE_METADATA' | translate }}</button>
+    <button (click)="setTab('ideaa')">{{'MENU.SCENE_LIST' | translate }}</button>
+    <metadata-tables></metadata-tables>
+}
+@if(currentTab==="ideas"){
     <metadata-tables></metadata-tables>
 }

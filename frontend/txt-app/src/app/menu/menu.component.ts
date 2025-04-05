@@ -1,6 +1,7 @@
+import { ApiService } from './../api/api.service';
 import { Component } from '@angular/core';
-import { TranslatePipe } from "../translate.pipe";
-import { TranslationService } from '../translation.service';
+import { TranslatePipe } from "../translation-utils/translate.pipe";
+import { TranslationService } from '../translation-utils/translation.service';
 
 @Component({
   selector: 'menu',
@@ -9,7 +10,11 @@ import { TranslationService } from '../translation.service';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
-  constructor(private translationService: TranslationService) {}
+createNewProject() {
+  this.apiService.createProject777()
+ 
+}
+  constructor(private translationService: TranslationService, private apiService: ApiService) {}
 
   setLang(lang: string): void {
     console.log('---in setlang')

@@ -128,5 +128,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# other
 frontend/IDEAS.MD
 backend/output
+backend/.idea
+frontend/.idea

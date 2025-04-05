@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ApiService } from '../api/api.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common'
 import { sceny } from '../data';
