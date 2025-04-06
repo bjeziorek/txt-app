@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 
 export const parsePropertiesFile = async (filePath: string): Promise<Record<string, string>> => {
     return new Promise((resolve, reject) => {
