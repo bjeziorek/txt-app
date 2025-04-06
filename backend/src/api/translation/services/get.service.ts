@@ -1,6 +1,5 @@
-import { getTranslation } from '../utils';
+import { parsePropertiesFile } from '../utils/parseProperties';
 
 export const getTranslationService = (lang: string) => {
-console.log('lang w serwisie',lang)
-    return getTranslation(lang)
+    return parsePropertiesFile(`./src/api/translation/langs/${lang}.properties`)
 };

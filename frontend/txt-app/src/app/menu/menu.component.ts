@@ -1,19 +1,49 @@
 import { ApiService } from './../api/api.service';
 import { Component } from '@angular/core';
 import { TranslatePipe } from "../translation-utils/translate.pipe";
+
+import { FormsModule } from '@angular/forms';
+
 import { TranslationService } from '../translation-utils/translation.service';
 
 @Component({
   selector: 'menu',
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, FormsModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
-createNewProject() {
-  this.apiService.createProject777()
+
+  mode = '';
+  
+ projectName: string = '';
+ projectTemplate: string = '';
+
+
+ openMenu(mode:string) {
+  this.mode=mode;
+ }
+
+ openOpenProject() {
+  this.mode="open_project";
+ }
+
+ onSubmitNewProject(form: any) {
+   if (form.valid) {
+     console.log('New: Wysłano nazwę projektu:', this.projectName);
+     this.apiService.createProject(this.projectName,this.projectTemplate)
+   }
+ }
+
+ onSubmitOpenProject(form: any) {
+   if (form.valid) {
+     console.log('Otwórz: Wysłano nazwę projektu:', this.projectName);
+     this.apiService.openProject(this.projectName,this.projectTemplate)
+   }
+ }
+
  
-}
+
   constructor(private translationService: TranslationService, private apiService: ApiService) {}
 
   setLang(lang: string): void {

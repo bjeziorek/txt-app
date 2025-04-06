@@ -1,10 +1,36 @@
 <p>menu works!</p>
 <button (click)="setLang('en')">{{'MENU.ENGLISH'|translate}}</button>
 <button (click)="setLang('pl')">{{'MENU.POLISH'|translate}}</button>
-<button (click)="createNewProject()">{{'MENU.NEW_PROJECT'|translate}}</button>
-<button>{{'MENU.OPEN'|translate}}</button>
+<br>
+<hr>
+<button (click)="openMenu('new_project')">{{'MENU.NEW_PROJECT'|translate}}</button>
+<br>
+@if(mode==='new_project'){
+    <form #formNewProject="ngForm" (ngSubmit)="onSubmitNewProject(formNewProject)">
+        <label for="projectName">{{'PROJECT_NAME'|translate}}</label>
+        <input id="projectName" name="projectName" [(ngModel)]="projectName" required />
+        <p>{{'PROJECT_TEMPLATE'|translate}}</p>
+        <input type="radio" id="category1" name="category" value="empty" [(ngModel)]="projectTemplate" required />
+        <label for="category1">{{'EMPTY'|translate}}</label>
+        <input type="radio" id="category2" name="category" value="novel" [(ngModel)]="projectTemplate" />
+        <label for="category2">{{'NOVEL' |translate}}</label>
+        <button type="submit">{{'MENU.CREATE'|translate}}</button>
+      </form>     
+}
+<br>
+<button (click)="openMenu('open_project')">{{'MENU.OPEN'|translate}}</button>
+@if(mode==='open_project'){
+    <form #formOpen="ngForm" (ngSubmit)="onSubmitOpenProject(formOpen)">
+        <label for="projectName">{{'PROJECT_NAME'|translate}}</label>
+        <input id="projectName" name="projectName" [(ngModel)]="projectName" required />
+        <button type="submit">{{'MENU.OPEN'|translate}}</button>
+      </form>     
+}
+<br>
+
+<!--  ideas is going to be part of a project -->
 <button >{{'MENU.IDEAS' | translate }}</button>
-<button >{{'MENU.X' | translate }}</button>
+
 <p>{{'MENU.LIST'|translate}}:</p>
 @for(project of projects; track project){
     <button>{{project}}</button>

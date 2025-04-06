@@ -1,5 +1,4 @@
 import { saveFile } from "./utils/crud";
-import { emptyTemplate, novelTemplate } from "./utils/fileTemplates";
 import app from "./app";
 
 // const express = require('express')

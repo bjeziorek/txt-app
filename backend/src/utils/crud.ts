@@ -12,7 +12,18 @@ export function exportProject(){
 
 }
 
-export function readFile(){
+export function readFile(filePath:string,){
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8'); // Odczyt pliku
+    return JSON.parse(data); // Parsowanie JSON
+  } catch (error) {
+    console.error(`Błąd odczytu pliku ${filePath}:`, error);
+    return null; // W przypadku błędu zwracamy null
+  }
+  // wejście do folderu, 
+  // odczytanie z config pliku ostanio używanego
+  // odczytanie struktury
+  // wysłanie listę setów na podstawie template - uwaga zapisać template do settings
 
 }
 

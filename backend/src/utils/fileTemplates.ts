@@ -1,13 +1,16 @@
 import { config } from "process"
-import { saveFile } from "./crud"
+import { saveFile, readFile } from "./crud"
+import path from "path"
 
 const TEMPLATE_VERSION=0.1
 
 const initTemplateConfigContent = {
     project_name: '?',
     template_version: TEMPLATE_VERSION,
+    sets: [] as string[],
     config: 'test',
-    model: 'novel | empty'
+    model: 'novel | empty',
+    last_seen: '0001'
 }
 
 const initTemplateJsonContent = {
@@ -28,7 +31,7 @@ enum Sets {
 export const TEMPLATES = {
     empty: [Sets.text],
     novel: [Sets.text, Sets.scenes, Sets.characters, Sets.places, Sets.events, Sets.ideas ],
-} //as const;
+} as const;
 
 const resolveTemplate = (template:string)=>{
     if(template==='empty'){
@@ -41,24 +44,32 @@ const resolveTemplate = (template:string)=>{
     return TEMPLATES.empty;
 }
 
-// przerobione generateInnerFiles
-export const initProject = (template:string,projectName:string)=>{
-    saveFile(projectName,'','config.json',initTemplateConfigContent);
-    saveFile(projectName,'','index.json',initTemplateJsonContent);
-    resolveTemplate(template).forEach(set=>{
-            saveFile(projectName, set, 'index.json', {files:['0001.json']})
-            saveFile(projectName, set, '0001.json', {text:''})
-        })
+export const openProject = (projectName:string)=>{
+    const data = null;
+  const filePath = path.join('output', projectName,'config.json');
+
+    const config = readFile(path.join('output', projectName,'config.json'));
+    const text =  readFile(path.join('output', projectName, 'text',`0001.json`));
+
+    return {
+        config,
+        text
+    }
 }
 
-// dousunięcia jak to powyżej zacznie działac
-export const generateInnerFiles = (template:string[],projectName:string)=>{
-    saveFile(projectName,'','config.json',initTemplateConfigContent);
-    saveFile(projectName,'','index.json',initTemplateJsonContent);
-    template.forEach(set=>{
+// przerobione generateInnerFiles - działa
+export const initProject = (template:string,projectName:string)=>{
+    let templateConfig= initTemplateConfigContent;
+    templateConfig.project_name=projectName
+
+    resolveTemplate(template).forEach(set=>{
+            templateConfig.sets.push(set)
             saveFile(projectName, set, 'index.json', {files:['0001.json']})
             saveFile(projectName, set, '0001.json', {text:''})
-        })
+        })    
+    saveFile(projectName,'','config.json',templateConfig);
+    saveFile(projectName,'','index.json',initTemplateJsonContent);
+    templateConfig=initTemplateConfigContent;
 }
 
 
@@ -95,18 +106,18 @@ type Template = {
     generate: (projectName:string)=>void
 }
 
-export const emptyTemplate:Template = {
-    generate:(projectName:string)=>{
-        generateInnerFiles([
-            Sets.text
-        ],projectName)
-    }
-}
+// export const emptyTemplate:Template = {
+//     generate:(projectName:string)=>{
+//         generateInnerFiles([
+//             Sets.text
+//         ],projectName)
+//     }
+// }
 
-export const novelTemplate: Template = {
-    generate:(projectName:string)=>{
-        generateInnerFiles([
-            Sets.text, Sets.scenes, Sets.characters, Sets.places, Sets.events
-        ],projectName)
-    }
-}
+// export const novelTemplate: Template = {
+//     generate:(projectName:string)=>{
+//         generateInnerFiles([
+//             Sets.text, Sets.scenes, Sets.characters, Sets.places, Sets.events
+//         ],projectName)
+//     }
+// }
