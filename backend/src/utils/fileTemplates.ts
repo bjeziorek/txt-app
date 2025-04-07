@@ -49,6 +49,8 @@ export const openProject = (projectName:string)=>{
   const filePath = path.join('output', projectName,'config.json');
 
     const config = readFile(path.join('output', projectName,'config.json'));
+
+    // TODO replace `0001.json` to last_seen from config
     const text =  readFile(path.join('output', projectName, 'text',`0001.json`));
 
     return {

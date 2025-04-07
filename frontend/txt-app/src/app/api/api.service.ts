@@ -18,14 +18,11 @@ export class ApiService {
 
   openProject(projectName:string,template:string) {
 
-    // const projectName='aegdhaseghaysfgasgakgka';
-    // const template = 'novel';
     const dataProject={name:projectName}
  
      console.log('zostanie wysłane: ',dataProject)
      const data = dataProject ;
      this.http.post('http://localhost:3000/data/project/open',
-      // this.http.post('http://localhost:3000/data/testSave',
        data).subscribe(
        response => {
          console.log('Response from server:', response, ' i tu muszę gdzieś wczytać te dane...');
