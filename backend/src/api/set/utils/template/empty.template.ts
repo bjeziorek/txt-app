@@ -1,15 +1,16 @@
-type EmptyTemplate = {
-    sets: string[],
-}
+import { generateTextSet } from "../sets/text.set";
+import { SetsData } from "../types";
 
 
-export function generateEmptyTemplate(){
-    return {
-        sets: ['text'],
-        setsContent: function generateSetsContent(){
-            this.sets.forEach(set=>{
-                // todo
-            })
-        }
-    }
-}
+const data: SetsData ={
+    "sets": [
+      {
+        "name": "text",
+        "fields": generateTextSet()
+      },
+    ]
+  }
+
+  export function generateEmptyTemplateSchema():SetsData{
+    return data;
+  }

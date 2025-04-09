@@ -15,14 +15,8 @@ const data: SetFields[] = [
     value: '-',
     isFieldRequired: true
 },
-{
-    name: 'formatting',
-    type: 'string',
-    value: '-',
-    isFieldRequired: false
-},
 ]
 
-export function generateTextSet(): SetFields[]{ 
+export function generateIdeaSet(): SetFields[]{ 
     return data;
 }

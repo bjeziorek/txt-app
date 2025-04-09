@@ -10,19 +10,25 @@ import { SetFields } from "../types";
 
 const data: SetFields[] = [
 {
-    name: 'content',
+    name: 'names',
+    type: 'string[]',
+    value: '-',
+    isFieldRequired: true
+},
+{
+    name: 'age/date of birth',
     type: 'string',
     value: '-',
     isFieldRequired: true
 },
 {
-    name: 'formatting',
+    name: 'description',
     type: 'string',
     value: '-',
     isFieldRequired: false
 },
 ]
 
-export function generateTextSet(): SetFields[]{ 
+export function generateCharacterSet(): SetFields[]{ 
     return data;
 }
