@@ -1,5 +1,5 @@
 import { config } from "process"
-import { saveFile, readFile } from "./crud"
+import { saveFile, readFile } from "../crud/crud"
 import path from "path"
 
 const TEMPLATE_VERSION=0.1

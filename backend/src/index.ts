@@ -1,5 +1,10 @@
-import { saveFile } from "./utils/crud";
+import { saveFile } from "./crud/crud";
 import app from "./app";
+import { convertXmlToTxt } from "./crud/xmlToTxt";
+
+
+convertXmlToTxt('data/2024.xml', 'data/2024.txt');
+
 
 // const express = require('express')
 // const bodyParser = require('body-parser');

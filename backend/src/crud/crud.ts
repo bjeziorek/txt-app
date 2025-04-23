@@ -14,18 +14,17 @@ export function exportProject(){
 
 export function readFile(filePath:string,){
   try {
-    const data = fs.readFileSync(filePath, 'utf-8'); // Odczyt pliku
-    return JSON.parse(data); // Parsowanie JSON
+    const data = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(data);
   } catch (error) {
     console.error(`Błąd odczytu pliku ${filePath}:`, error);
-    return null; // W przypadku błędu zwracamy null
+    return null;
   }
-  // wejście do folderu, 
+} 
+ // wejście do folderu, 
   // odczytanie z config pliku ostanio używanego
   // odczytanie struktury
   // wysłanie listę setów na podstawie template - uwaga zapisać template do settings
-
-}
 
 export function saveFile(projectName:string, setName: string, fileName: string, fileContent: object):string{
     const filePath = path.join('output', projectName, setName, fileName);
