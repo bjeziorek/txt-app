@@ -1,5 +1,5 @@
-import app from "../../app";
-import { parsePropertiesFile } from "./utils/parseProperties";
+import app from "../../../app";
+import { parsePropertiesFile } from "./parseProperties";
 const fs = require('fs');
 
 export function getTranslation(lang:string){
