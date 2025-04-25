@@ -53,9 +53,9 @@ export class MenuComponent {
 
 
 // wczytać do projects listę plików z enpointa
-// program chyba musiałby sobie ją gdzieś zapisywać w jakichś swoich wewntrznych tempach, ja to jest robione?
+// program chyba musiałby sobie ją gdzieś zapisywać w jakichś swoich wewntrznych tempach, jak to jest robione?
 
-projects: any;
+// projects: any;
 
 ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.

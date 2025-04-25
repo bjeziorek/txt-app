@@ -17,9 +17,7 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   openProject(projectName:string,template:string) {
-
     const dataProject={name:projectName}
- 
      console.log('zostanie wysłane: ',dataProject)
      const data = dataProject ;
      this.http.post('http://localhost:3000/data/project/open',
@@ -33,16 +31,11 @@ export class ApiService {
      );
    }
 
-  createProject(projectName:string,template:string) {
-
-    // const projectName='aegdhaseghaysfgasgakgka';
-    // const template = 'novel';
+  createProject(projectName:string,template:string):void {
     const dataProject={name:projectName,template}
- 
      console.log('zostanie wysłane: ',dataProject)
      const data = dataProject ;
      this.http.post('http://localhost:3000/data/project/create',
-      // this.http.post('http://localhost:3000/data/testSave',
        data).subscribe(
        response => {
          console.log('Response from server:', response);
