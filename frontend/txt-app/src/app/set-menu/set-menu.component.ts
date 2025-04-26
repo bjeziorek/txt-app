@@ -15,12 +15,12 @@ enum Tabs  {
 
 
 @Component({
-  selector: 'app-main-menu',
+  selector: 'app-set-menu',
   imports: [TranslatePipe, SceneComponent, DataTablesComponent],
-  templateUrl: './main-menu.component.html',
-  styleUrl: './main-menu.component.css'
+  templateUrl: './set-menu.component.html',
+  styleUrl: './set-menu.component.css'
 })
-export class MainMenuComponent {
+export class SetMenuComponent {
   constructor(translationService:TranslationService){
     translationService.loadTranslations();
   }
