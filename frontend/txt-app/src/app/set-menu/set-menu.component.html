@@ -1,5 +1,14 @@
 <p>set-menu works!</p>
 
+<!-- it displays buttons basing on received list of sets from config file-->
+@if(data) {
+    @for(set of data.config.sets; track set){
+        <button>{{'MENU.'+set.toUpperCase()|translate}}</button>
+    }
+}
+
+<!-- stuff below should be removed -->
+<p>======================</p>
 <button (click)="setTab('text')">{{'MENU.TEXT' | translate }}</button>
 <button (click)="setTab('characters')">{{'MENU.CHARACTERS' | translate }}</button>
 <button (click)="setTab('events')">{{'MENU.EVENTS' | translate }}</button>

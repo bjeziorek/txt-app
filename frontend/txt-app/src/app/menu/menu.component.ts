@@ -31,14 +31,19 @@ export class MenuComponent {
  onSubmitNewProject(form: any) {
    if (form.valid) {
      console.log('New: Wysłano nazwę projektu:', this.projectName);
-     this.apiService.createProject(this.projectName,this.projectTemplate)
+     const res= this.apiService.createProject(this.projectName,this.projectTemplate)
+
+   
+      console.log('res',res)
+   
+     
    }
  }
 
  onSubmitOpenProject(form: any) {
    if (form.valid) {
      console.log('Otwórz: Wysłano nazwę projektu:', this.projectName);
-     this.apiService.openProject(this.projectName,this.projectTemplate)
+     this.apiService.openProject(this.projectName)
    }
  }
 
@@ -69,3 +74,4 @@ ngOnInit(): void {
 }
 
 }
+ 

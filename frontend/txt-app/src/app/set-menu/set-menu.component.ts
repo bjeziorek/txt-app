@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { TranslatePipe } from "../translation-utils/translate.pipe";
 import { SceneComponent } from "../scene/scene.component";
 import { DataTablesComponent } from "../metadata-tables/metadata-tables.component";
+import { ApiService } from '../api/api.service';
 
 // TODO this should come fron backend
 enum Tabs  {
@@ -21,9 +22,23 @@ enum Tabs  {
   styleUrl: './set-menu.component.css'
 })
 export class SetMenuComponent {
-  constructor(translationService:TranslationService){
+
+  data:any;
+
+  constructor(
+    translationService:TranslationService,
+    private api: ApiService
+  ){
     translationService.loadTranslations();
   }
+
+  ngOnInit() {
+    this.api.openProjectData$.subscribe((response: any) => {
+      this.data = response;
+      console.log('res in set menu',this.data)
+    });
+  }
+
   currentTab=Tabs.text;
   setTab(tab:string){
     this.currentTab=tab as Tabs;

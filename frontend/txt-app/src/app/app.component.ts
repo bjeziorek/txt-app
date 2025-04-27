@@ -6,10 +6,11 @@ import { SetMenuComponent } from "./set-menu/set-menu.component";
 import { ScenesComponent } from "./scenes/scenes.component";
 import { CharactersComponent } from "./characters/characters.component";
 import { SceneComponent } from "./scene/scene.component";
+import { SetDataComponent } from "./set-data/set-data.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, DataTablesComponent, MenuComponent, SetMenuComponent, ScenesComponent, CharactersComponent, SceneComponent],
+  imports: [RouterOutlet, MenuComponent, SetMenuComponent, SetDataComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

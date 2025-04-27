@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Schema } from '../txt.model';
 
 
@@ -13,16 +13,21 @@ export class ApiService {
   private apiUrlUpdateSceneById = 'http://localhost:3000/data/scene/id-pov';
   private test = 'http://localhost:3000/test';
 
+  private openProjectDataSubject = new BehaviorSubject<any>(null); // Inicjalizacja z wartością null
+  public openProjectData$ = this.openProjectDataSubject.asObservable(); // Eksponowanie jako Observable
+
 
   constructor(private http: HttpClient) {}
 
-  openProject(projectName:string,template:string) {
+  openProject(projectName:string) {
     const dataProject={name:projectName}
-     console.log('zostanie wysłane: ',dataProject)
+     console.log('zostanie wysłane:', dataProject)
      const data = dataProject ;
      this.http.post('http://localhost:3000/data/project/open',
-       data).subscribe(
+       data)
+       .subscribe(
        response => {
+        this.openProjectDataSubject.next(response)
          console.log('Response from server:', response, ' i tu muszę gdzieś wczytać te dane...');
        },
        error => {
@@ -36,14 +41,16 @@ export class ApiService {
      console.log('zostanie wysłane: ',dataProject)
      const data = dataProject ;
      this.http.post('http://localhost:3000/data/project/create',
-       data).subscribe(
-       response => {
-         console.log('Response from server:', response);
-       },
-       error => {
-         console.error('Error:', error);
-       }
-     );
+       data)
+       
+    //    .subscribe(
+    //    response => {
+    //      console.log('Response from server:', response);
+    //    },
+    //    error => {
+    //      console.error('Error:', error);
+    //    }
+    //  );
    }
  
    getTranslation(lang:string) {
@@ -53,21 +60,7 @@ export class ApiService {
      console.log('zostanie wysłane: ',dataProject)
      const data = dataProject ;
     return this.http.post('http://localhost:3000/data/translation/get',
-      // this.http.post('http://localhost:3000/data/testSave',
        data)
-       
-    //    .subscribe(
-    //    response => {
-    //      console.log('-----Response from server:', response);
-    //      return response
-    //    },
-    //    error => {
-    //      console.error('-----Error:', error);
-    //      return error
-    //    }
-    //  );
-
-   
    }
 
 
