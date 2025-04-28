@@ -9,7 +9,7 @@ const initTemplateConfigContent = {
     sets: [] as string[],
     config: 'test',
     template: 'novel | empty',
-    last_seen: ['0001']
+    last_seen: ['0001.json']
 }
 
 const initTemplateJsonContent = {

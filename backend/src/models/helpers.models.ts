@@ -1,3 +1,6 @@
+import { SetsEnum } from "../utils/setResolver";
+import { TemplatesEnum } from "../utils/templateResolver";
+
 export type SubText = {
     id: string,
     sceneId: string,
@@ -21,4 +24,13 @@ export type DateKryst = {
   day:number,
   hour:number,
   desc:string,
+}
+
+export type IndexType = {
+  project_name: string,
+  template_version: string,
+  sets: SetsEnum[],
+  config: string,
+  template: TemplatesEnum,
+  last_seen: string[]
 }

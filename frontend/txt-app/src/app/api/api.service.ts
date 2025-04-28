@@ -14,12 +14,32 @@ export class ApiService {
   private test = 'http://localhost:3000/test';
 
   private openProjectDataSubject = new BehaviorSubject<any>(null); // Inicjalizacja z wartością null
+  private openSetDataSubject = new BehaviorSubject<any>(null); // Inicjalizacja z wartością null
   public openProjectData$ = this.openProjectDataSubject.asObservable(); // Eksponowanie jako Observable
-
+  public openSetData$ = this.openSetDataSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
+  currentProject = '';
+
+  openSet(set:string,fileName:string,includeIndex:boolean) {
+    console.log('========',set,'0001.json',includeIndex)
+     const data ={projectName:this.currentProject,set,fileName,includeIndex};
+     this.http.post('http://localhost:3000/data/set/open',
+       data)
+       .subscribe(
+       response => {
+        this.openProjectDataSubject.next(response)
+         console.log('Response from server:', response, ' i tu muszę gdzieś wczytać te dane dla setu...');
+       },
+       error => {
+         console.error('Error:', error);
+       }
+     );
+   }
+
   openProject(projectName:string) {
+    this.currentProject=projectName
     const dataProject={name:projectName}
      console.log('zostanie wysłane:', dataProject)
      const data = dataProject ;
@@ -43,14 +63,15 @@ export class ApiService {
      this.http.post('http://localhost:3000/data/project/create',
        data)
        
-    //    .subscribe(
-    //    response => {
-    //      console.log('Response from server:', response);
-    //    },
-    //    error => {
-    //      console.error('Error:', error);
-    //    }
-    //  );
+       // z jakiegoś niepojętego powodu musi być ten subscribe, inaczej backend nie robi create jak to jest zakomentowane, a jak jest odkomentowane to robi
+       .subscribe(
+       response => {
+         console.log('Response from server:', response);
+       },
+       error => {
+         console.error('Error:', error);
+       }
+     );
    }
  
    getTranslation(lang:string) {

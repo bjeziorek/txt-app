@@ -13,7 +13,7 @@ const initTemplateConfigContent = {
     template_version: TEMPLATE_VERSION,
     sets: [] as string[],
     template: 'empty',
-    last_seen: ['0001']
+    last_seen: ['0001.json']
 }
 
 // this scructure requires rebuilding
@@ -25,6 +25,7 @@ const initTemplateJsonContent = {
 }
 
 export const createProject = (template:TemplatesEnum,projectName:string)=>{
+    console.log('teeeeeeest', template,projectName)
     // assign default content for config file, requires filling some filelds
     let templateConfig= initTemplateConfigContent;
     // filling project_name field

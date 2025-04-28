@@ -1,17 +1,18 @@
 import { saveFile, readFile } from "../crud/crud"
 import path from "path"
-import { resolveSet, SetsEnum } from "./setResolver"
+import { resolveSet } from "./setResolver"
 import { resolveTemplate, TemplatesEnum } from "./templateResolver"
+import { IndexType } from "../models/helpers.models"
 
-const TEMPLATE_VERSION=0.1
+const TEMPLATE_VERSION="0.1"
 
-const initTemplateConfigContent = {
+const initTemplateConfigContent: IndexType = {
     project_name: '?',
     template_version: TEMPLATE_VERSION,
-    sets: [] as string[],
+    sets: [],
     config: 'test',
-    template: 'novel | empty',
-    last_seen: ['0001']
+    template: TemplatesEnum.empty,
+    last_seen: ['0001.json']
 }
 
 const initTemplateJsonContent = {

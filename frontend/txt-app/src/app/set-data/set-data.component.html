@@ -1,4 +1,9 @@
-<p>set-data works!</p>
+@if(data) {
+    @for(set of data.config.sets; track set){
+        <button (click)="getSet(set)">{{'MENU.'+set.toUpperCase()|translate}}</button>
+    }
+}
+
 @if(data){
-    <p contenteditable>{{data.text.subTexts[0]}}</p>
+    <p contenteditable>{{data.text}}</p>
 }

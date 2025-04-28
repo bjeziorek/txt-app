@@ -13,8 +13,10 @@ export function exportProject(){
 }
 
 export function readFile(filePath:string,){
+  console.log('readData',filePath)
   try {
     const data = fs.readFileSync(filePath, 'utf-8');
+    console.log('ok',data)
     return JSON.parse(data);
   } catch (error) {
     console.error(`Błąd odczytu pliku ${filePath}:`, error);
