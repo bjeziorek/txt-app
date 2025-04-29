@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Schema } from '../txt.model';
+import { flattenObject } from '../utils/utils';
 
 
 @Injectable({
@@ -15,21 +16,23 @@ export class ApiService {
 
   private openProjectDataSubject = new BehaviorSubject<any>(null); // Inicjalizacja z wartością null
   private openSetDataSubject = new BehaviorSubject<any>(null); // Inicjalizacja z wartością null
+  private openSetIndexSubject = new BehaviorSubject<any>(null); // Inicjalizacja z wartością null
   public openProjectData$ = this.openProjectDataSubject.asObservable(); // Eksponowanie jako Observable
   public openSetData$ = this.openSetDataSubject.asObservable();
+  public openSetIndex$ = this.openSetDataSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
   currentProject = '';
 
   openSet(set:string,fileName:string,includeIndex:boolean) {
-    console.log('========',set,'0001.json',includeIndex)
      const data ={projectName:this.currentProject,set,fileName,includeIndex};
      this.http.post('http://localhost:3000/data/set/open',
        data)
        .subscribe(
        response => {
-        this.openProjectDataSubject.next(response)
+      //  this.openSetIndexSubject.next(flattenObject(response))
+        this.openSetDataSubject.next(response)
          console.log('Response from server:', response, ' i tu muszę gdzieś wczytać te dane dla setu...');
        },
        error => {
@@ -74,6 +77,22 @@ export class ApiService {
      );
    }
  
+   createSet(set:string,fileName:string,fileData:object,mode:string) {
+    const data ={projectName:this.currentProject,set,fileName,fileData,mode};
+    this.http.post('http://localhost:3000/data/set/create',
+      data)
+      .subscribe(
+      response => {
+     //  this.openSetIndexSubject.next(flattenObject(response))
+       //this.openSetDataSubject.next(response)
+        console.log('Response from server:', response, '  - utworzono set');
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
    getTranslation(lang:string) {
 
     const dataProject={lang}

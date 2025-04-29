@@ -4,6 +4,27 @@
     }
 }
 
-@if(data){
-    <p contenteditable>{{data.text}}</p>
+<!-- <p  contenteditable="true" (input)="updateValue($event)" [innerHTML]="textControl.value">teeest</p> -->
+<p style="border: 4px solid red;" contenteditable="true" (input)="updateValue($event)" (keydown)="saveCursorPosition($event)" #editableParagraph></p>
+
+@if(data2){
+<div style="display: flex; flex-direction: row;">
+    <div style="border: 2px solid olive; margin-right: 4px;display: flex; flex-direction: column;">
+        <p>lista setów</p>
+        <button (click)="createNewSet()">+ New set</button>
+        @for(file of data2?.index.files; track file){
+            <button>{{file}}</button>
+        }
+    </div>
+    <div>
+        <p>dane setu</p>
+      
+        @for(set of setData; track set){
+            <p>{{set.field }}: {{set.value | json}}</p>
+        }
+    </div>
+</div>
 }
+<!-- @if(data){
+    <p contenteditable>{{data.text}}</p>
+} -->
