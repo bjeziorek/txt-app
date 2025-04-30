@@ -1,0 +1,7 @@
+.unsaved {
+    border: 4px solid orange;
+  }
+  
+  .saved {
+    border: 4px solid green;
+  }
