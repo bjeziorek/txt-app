@@ -10,19 +10,13 @@ export enum SetsEnum {
 }
 
 export const SET_TEXT_DEFAULT: TextType = {
-    subtexts:[
-        {
-            id: '1',
-            sceneId: '1',
-            text: '',
-            comments:['']
-        }
-    ],
+    text:'',
     formatting: []
 } as const;
 
 export const SET_SCENES_DEFAULT: ScenesType = {
     nr: 0,
+    part: 0,
     sceneIntensity: 0,
     idMalformation: '',
     descTitle: '',

@@ -13,7 +13,7 @@ type InitTemplateConfigContentType = {
     template_version: string,
     sets: string[],
     template: TemplatesEnum,
-    last_seen: string[]
+    lastSeen: string[]
 };
 
 const initTemplateConfigContent: InitTemplateConfigContentType = {
@@ -21,7 +21,7 @@ const initTemplateConfigContent: InitTemplateConfigContentType = {
     template_version: TEMPLATE_VERSION,
     sets: [] as string[],
     template: TemplatesEnum.empty,
-    last_seen: ['0001.json']
+    lastSeen: ['']
 } as const;
 
 // this scructure requires rebuilding
@@ -48,9 +48,10 @@ export const createProject = (template:TemplatesEnum,projectName:string)=>{
         // filling sets field
             templateConfig.sets.push(set)
             // saves file content (4th arg) to file (3rd arg)
-            saveFile(projectName, set, 'index.json', {files:['0001.json']})
+            const newFileName=Date.now();
+            saveFile(projectName, set, 'index.json', {files:[newFileName+'.json'],lastSeen:newFileName+'.json'})
             // resolveSet returns dedicated template for given set
-            saveFile(projectName, set, '0001.json', resolveSet(set))
+            saveFile(projectName, set, newFileName+'.json', resolveSet(set))
         })    
     saveFile(projectName,'','config.json',templateConfig);
     saveFile(projectName,'','index.json',initTemplateJsonContent);

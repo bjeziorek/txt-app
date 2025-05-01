@@ -9,7 +9,7 @@ const initTemplateConfigContent = {
     sets: [] as string[],
     config: 'test',
     template: 'novel | empty',
-    last_seen: ['0001.json']
+    lastSeen: ['0001.json']
 }
 
 const initTemplateJsonContent = {
@@ -23,12 +23,14 @@ export const openProject = (projectName:string)=>{
 
     const config = readFile(path.join('output', projectName,'config.json'));
 
-    // TODO replace `0001.json` to last_seen from config
+    const textIndex = readFile(path.join('output', projectName, 'text', 'index.json'));
+    console.log('lastSeen',textIndex)
+    // TODO replace `0001.json` to lastSeen from config
     // moreover I need to make it recursive for any template
     // here is works only for empty
 
     // what text give me? parsed content of asked file
-    const text =  readFile(path.join('output', projectName, 'text',`0001.json`));
+    const text =  readFile(path.join('output', projectName, 'text',textIndex.lastSeen));
 
       // ok, how can I know what should I send?
       // core set is always text set, lastSeen should relate to text set and all accompanying files should be sent probably? Or maybe on demand only?

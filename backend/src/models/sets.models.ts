@@ -1,12 +1,13 @@
 import { CharacterInScene, DateKryst, SubText } from "./helpers.models"
 
 export type TextType = {
-    subtexts:SubText[]
+    text:string,
     formatting: any[]
 }
 
 export type ScenesType = {
   nr: number,
+  part: number,
   sceneIntensity?:number,
   idMalformation? :string,
   descTitle:string,

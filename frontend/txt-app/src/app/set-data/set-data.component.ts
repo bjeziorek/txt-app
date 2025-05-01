@@ -21,7 +21,7 @@ export class SetDataComponent {
   index: any;
   setData: any;
 
-constructor(private api: ApiService){
+constructor(public api: ApiService){
   console.log('data z inout set-data',this.data)
 }
 
@@ -34,6 +34,7 @@ ngOnInit() {
     console.log('res in data menu',this.data)
   });
   this.api.openSetData$.subscribe((response: any) => {
+    console.log('openset:',response)
     this.rawData = response;
     if(this.rawData){
       this.setData=flattenObject(this.rawData.file);
@@ -41,11 +42,18 @@ ngOnInit() {
   });
 }
 
+openSetFile(setFileName: string,setName:string) {
+  console.log('openSet:',setName,setFileName)
+  this.api.openSet(setName,setFileName,true)
+  
+  }
+
   public createNewSet(){
     this.api.createSet(this.currentSet,'',{},'createNewSingularFile')
   }
 
   public getSet = (set: string)=>{
+    console.log('in btn getset',set)
     this.currentSet=set;
     this.data1=this.api.openSet(set,'',true);
   }

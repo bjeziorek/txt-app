@@ -26,6 +26,7 @@ export const openSet= (projectName:string,set:SetsEnum,fileName:string,includeIn
      // const file:IndexType = JSON.parse(path.join('output', projectName, set, 'index.json'))
       //fileName=file.last_seen[0]?file.last_seen[0]:"0001.json"
       fileName='0001.json'
+      fileName = readFile(path.join('output', projectName, set, 'index.json')).lastSeen
     }
       data.file = readFile(path.join('output', projectName, set, fileName))
     console.log('data',data)

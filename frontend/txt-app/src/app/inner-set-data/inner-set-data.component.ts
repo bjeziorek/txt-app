@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ApiService } from '../api/api.service';
 
 type DataType = {
   field: string,
@@ -16,13 +17,14 @@ type DataType = {
 export class InnerSetDataComponent {
   @Input() data:any;
   @Input() rawData:any;
-
+  
   textControl = new FormControl();
   private savedSelection: Range | null = null;
   label = ''
   isUnsaved = false;
+  isArray=false;
   
-  constructor(){
+  constructor(public api: ApiService){
     if(this.data){
       this.textControl.setValue(this.data.value)
     }
@@ -32,26 +34,49 @@ export class InnerSetDataComponent {
     if (changes['data']) {
       console.log(changes['data'])
       this.label=changes['data'].currentValue.field;
+      this.isArray=Array.isArray(this.data.value)
+      // if(this.isArray){
+      //   this.textControl.setValue(changes['data'].currentValue.value[currentI]);
+      // }else{
       this.textControl.setValue(changes['data'].currentValue.value);
+      // }
+      console.log(this.data.value,Array.isArray(this.data.value))
     }
   }
 
-  saveCursorPosition(event: KeyboardEvent) {
+add(){
+  //this.data.value.push('')
+}
+
+  saveCursorPosition(event: KeyboardEvent,i=0) {
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
       this.savedSelection = selection.getRangeAt(0);
     }
   }
 
-  saveValue(){
+  saveValue(i=0){
+    console.log('saveValue, rawData',this.rawData)
+    //this.rawData.file.fileName;
+    console.log('save value - todo')
     this.isUnsaved = false;
     const dataToSend={...this.rawData};
     console.log('rawData',this.rawData)
-    dataToSend[this.data.field]=this.textControl.value
+    if(this.isArray){
+      dataToSend[this.data.field[i]]=this.textControl.value[i]
+    }else{
+      dataToSend[this.data.field]=this.textControl.value
+    }
     console.log('datato send',dataToSend)
+    this.api.createSet(
+      this.rawData.setName,
+      this.rawData.fileName,
+      dataToSend,
+      'updateExistinngSingularFile'
+    )
   }
   
-  updateValue(event: Event) {
+  updateValue(event: Event,i=0) {
     this.isUnsaved = true;
     const element = event.target as HTMLElement;
     this.textControl.setValue(element.innerHTML);

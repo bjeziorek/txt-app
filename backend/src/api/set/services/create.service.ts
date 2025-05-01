@@ -21,7 +21,7 @@ export const createSet= async (
   fileData:object,
   mode:CreateSetModesEnum
 )=>{
-  console.log('openSet',projectName,set,fileName)
+  console.log('createSet',projectName,set,fileName)
     const data: ReturnArg = {
       index: null,
       file: {}
@@ -46,7 +46,7 @@ export const createSet= async (
         // create new singular file
     // for existing set user creates new file
         const newFileName = Date.now().toString()
-        saveFile(projectName, set,newFileName , resolveSet(set))
+        saveFile(projectName, set,newFileName+'.json' , resolveSet(set))
         const rawData = readFile(path.join('output', projectName, set, 'index.json'))
         console.log('---------------',rawData)
        // const jsonData = JSON.parse(rawData);

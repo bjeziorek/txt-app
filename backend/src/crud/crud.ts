@@ -28,10 +28,12 @@ export function readFile(filePath:string,){
   // odczytanie struktury
   // wysłanie listę setów na podstawie template - uwaga zapisać template do settings
 
-export function saveFile(projectName:string, setName: string, fileName: string, fileContent: object):string{
+export function saveFile(projectName:string, setName: string, fileName: string, fileContent: any):string{
     const filePath = path.join('output', projectName, setName, fileName);
     const dirPath = path.dirname(filePath);
     let resultInfo = '';
+    fileContent.fileName=fileName;
+    fileContent.setName=setName;
 
     fs.mkdir(dirPath, { recursive: true }, (err: NodeJS.ErrnoException | null) => {
         if (err) {

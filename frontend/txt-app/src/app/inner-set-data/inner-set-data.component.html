@@ -1,6 +1,37 @@
-
 @if(data){
    <h2>{{data.field}}</h2>
-<p  [ngClass]="{'unsaved': isUnsaved, 'saved': !isUnsaved}" contenteditable="true" (input)="updateValue($event)" (keydown)="saveCursorPosition($event)" #editableParagraph>{{data.value}}</p>
-<button (click)="saveValue()">zapisz</button>
+<p>isArray:{{isArray}}</p>
+@if(isArray){
+   @for(field of data.field; track field; let i = $index){
+     <!-- albo muszę zrobić dedykowany komponent do arrayów, albo to ręcznie obsłużyć tu, to poniżej nie działa poprawnie -->
+      <!-- <app-inner-set-data
+      [data]="field" 
+      [rawData]="data"
+      ></app-inner-set-data> -->
+
+      <!-- tez nie dziala -->
+      <!-- <p  
+      [ngClass]="{'unsaved': isUnsaved, 'saved': !isUnsaved}" 
+      contenteditable="true" 
+      (input)="updateValue($event,i)" 
+      (keydown)="saveCursorPosition($event,i)"
+      #editableParagraph
+   >
+     test {{data.value[i]}}
+   </p> 
+   <button (click)="saveValue(i)">zapisz {{i}}</button> -->
+    }
+  <!-- <button (click)="add()">TODO dodaj</button> --> -->
+}@else{
+   <p  
+      [ngClass]="{'unsaved': isUnsaved, 'saved': !isUnsaved}" 
+      contenteditable="true" 
+      (input)="updateValue($event)" 
+      (keydown)="saveCursorPosition($event)"
+      #editableParagraph
+   >
+      {{data.value}}
+   </p>
+   <button (click)="saveValue()">zapisz</button>
+   }
 }
