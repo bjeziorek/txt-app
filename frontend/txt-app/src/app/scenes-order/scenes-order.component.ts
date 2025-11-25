@@ -4,7 +4,9 @@ import { rawData } from './rawData';
 
 type ElementType = {
   element: string,
-  isActive: boolean
+  isActive: boolean,
+  isFixed: boolean,
+  todo:string,
 }
 
 @Component({
@@ -25,6 +27,8 @@ data=rawData.map((el:string)=>{
   const element: ElementType ={
     element:el,
     isActive:true,
+    isFixed: false,
+    todo:''
   }
 
   return element;
@@ -35,8 +39,15 @@ add(i:string){
   const newElement: ElementType = {
     element:'===== TODO ====',
     isActive:true,
+    isFixed: false,
+    todo:''
   }
   this.data.splice(saniI, 0, newElement);
+}
+
+changeTodo(i:number,content:string){
+ this.data[i].todo=content
+
 }
 
 changeIndex(sceneIndex:string,record:ElementType,i:number){
@@ -74,6 +85,10 @@ activity(i:number){
 
 toggle_false(){
   this.isFalseShown=!this.isFalseShown
+}
+
+toggle_fixed(i:number){
+  this.data[i].isFixed=!this.data[i].isFixed
 }
 
 }

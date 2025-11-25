@@ -42,15 +42,19 @@
             (mouseleave)="hoveredIndex = null"
         >
         <span>{{i}}.</span>
-        <span style="margin-right: 4px;" [ngClass]="{ 'inactive': !record.isActive }">{{record.element}} - {{record.isActive}}</span>
+        <span style="margin-right: 4px;" [ngClass]="{ 'inactive': !record.isActive, 'fixed':record.isFixed }">{{record.element}} - {{record.isActive}}</span>
       @if(hoveredIndex === i){
         <button (click)="up(i)">^</button>
         <button (click)="down(i)">v</button>
         <button (click)="activity(i)">x</button>
+        <button (click)="toggle_fixed(i)">OK</button>
         <input style="width: 16px;" #sceneIndex/>
         <button (click)="changeIndex(sceneIndex.value,record,i)">zmień index</button> 
         <input #sceneName type="text" placeholder="nazwa sceny" />
-        <button (click)="changeSceneName(sceneName.value,i)">zmień nazwę</button> <br>
+        <button (click)="changeSceneName(sceneName.value,i)">zmień nazwę</button>
+        <span>todo: {{record.todo}}</span>
+         <input #todo type="text" placeholder="todo" />
+        <button (click)="changeTodo(i,todo.value)">zmień todo</button> <br>
       }
     </p>
     }
