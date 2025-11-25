@@ -5,22 +5,25 @@ import { TranslatePipe } from "../translation-utils/translate.pipe";
 import { FormsModule } from '@angular/forms';
 
 import { TranslationService } from '../translation-utils/translation.service';
+import { ScenesOrderComponent } from "../scenes-order/scenes-order.component";
+
+type ModesType = 'none' | 'open_project' | 'new_project' | 'scenes_order'
 
 @Component({
   selector: 'menu',
-  imports: [TranslatePipe, FormsModule],
+  imports: [TranslatePipe, FormsModule, ScenesOrderComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
 
-  mode = '';
+  mode:ModesType  = 'none';
   
  projectName: string = '';
  projectTemplate: string = '';
 
 
- openMenu(mode:string) {
+ openMenu(mode:ModesType) {
   this.mode=mode;
  }
 
@@ -47,7 +50,9 @@ export class MenuComponent {
    }
  }
 
- 
+ goToScenesOrder(){
+  this.mode='scenes_order'
+ }
 
   constructor(private translationService: TranslationService, private apiService: ApiService) {}
 

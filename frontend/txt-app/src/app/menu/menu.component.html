@@ -1,10 +1,16 @@
 <p>menu works!</p>
+<button (click)="goToScenesOrder()">{{'MENU.SCENES_ORDER'|translate}}</button>
 <button (click)="setLang('en')">{{'MENU.ENGLISH'|translate}}</button>
 <button (click)="setLang('pl')">{{'MENU.POLISH'|translate}}</button>
 <br>
 <hr>
 <button (click)="openMenu('new_project')">{{'MENU.NEW_PROJECT'|translate}}</button>
 <br>
+
+@if(mode==='none'){
+<p>wybierz coś z menu</p>
+}
+
 @if(mode==='new_project'){
     <form #formNewProject="ngForm" (ngSubmit)="onSubmitNewProject(formNewProject)">
         <label for="projectName">{{'PROJECT_NAME'|translate}}</label>
@@ -27,7 +33,9 @@
       </form>     
 }
 <br>
-
+@if(mode==='scenes_order'){
+<app-scenes-order></app-scenes-order>
+}
 <hr>
 <!--  ideas is going to be part of a project -->
   <!-- why the hell it's here?? -->

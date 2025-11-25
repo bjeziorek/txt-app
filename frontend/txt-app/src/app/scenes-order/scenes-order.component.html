@@ -1,0 +1,57 @@
+<p>scenes-order works!</p>
+
+<!-- chcę tu mieć listę, którą można przesuwać
+ jak można przesuwać listę?
+ strzałeczkami
+ lub wpisać nowy numerek
+ 
+ jak zacząć?
+ zrobić sobie tablicę stringow losowa
+ i te 2 opcje
+ 
+ a potem 
+ 
+ mozliwosc dodawania pomiędzy nowego rekordu
+ możliwosc zmiany nazwy
+ mozliwosc usuwania
+
+ format wyswietlania jako json (toggle), zeby sie dalo przekopiowac bez be
+
+ markery czy scena todo czy pomysl czy rozgrzebana czy do dodanie opisow - rozne ikonki konfigurowalne co ktora znaczy
+
+ stan sceny
+
+ pokaz numeracje / schowaj
+
+ wyszarzanie scen i wyłączanie ich z nunmeracji
+
+ hide false
+ -->
+
+<button (click)="toggle_false()">show/hide false</button>
+<br>
+
+<input #sceneInput type="text" placeholder="index" />
+<button (click)="add(sceneInput.value)">index sceny</button> <br>
+
+
+ @for(record of data; track record; let i = $index){
+    @if(isFalseShown || record.isActive){
+        <p
+            (mouseenter)="hoveredIndex = i" 
+            (mouseleave)="hoveredIndex = null"
+        >
+        <span>{{i}}.</span>
+        <span style="margin-right: 4px;" [ngClass]="{ 'inactive': !record.isActive }">{{record.element}} - {{record.isActive}}</span>
+      @if(hoveredIndex === i){
+        <button (click)="up(i)">^</button>
+        <button (click)="down(i)">v</button>
+        <button (click)="activity(i)">x</button>
+        <input style="width: 16px;" #sceneIndex/>
+        <button (click)="changeIndex(sceneIndex.value,record,i)">zmień index</button> 
+        <input #sceneName type="text" placeholder="nazwa sceny" />
+        <button (click)="changeSceneName(sceneName.value,i)">zmień nazwę</button> <br>
+      }
+    </p>
+    }
+ }

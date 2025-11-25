@@ -43,3 +43,4 @@ Thumbs.db
 
 # my private data
 /src/app/data.ts
+/src/app/scenes-order/rawData.ts

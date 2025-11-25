@@ -135,3 +135,4 @@ backend/output
 backend/.idea
 frontend/.idea
 backend/data/2024.xml
+frontend/txt-app/src/app/scenes-order/rawData.ts

@@ -1,0 +1,78 @@
+.inactive {
+  text-decoration: line-through; /* przekreślony */
+  color: gray;                  /* wyszarzony */
+}
+
+/* Ogólne resetowanie marginesów i fontów */
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background-color: #f5f6f7;
+  color: #333;
+  padding: 2rem;
+}
+
+/* Pola input */
+input[type="text"], input[type="number"], textarea {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.6rem 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #1e1447;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, textarea:focus {
+  border-color: #6c8ef2;
+  box-shadow: 0 0 4px rgba(108, 142, 242, 0.4);
+  outline: none;
+}
+
+/* Przyciski */
+button {
+  padding: 0.6rem 1.2rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 6px;
+  background-color: #6c8ef2;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+  background-color: #5a7ae0;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* Dodatkowe warianty */
+button.secondary {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+button.secondary:hover {
+  background-color: #d5d5d5;
+}
+
+p {
+  background-color: #061546;       /* jasne tło */
+  border: 1px solid #ddd;          /* delikatna obramówka */
+  border-radius: 8px;              /* zaokrąglone rogi */
+  padding: 1rem 1.2rem;            /* odstęp wewnętrzny */
+  margin: 1rem 0;                  /* odstęp między cardami */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* subtelny cień */
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+/* efekt hover – lekko podniesiony card */
+p:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  /* transform: translateY(-2px); */
+}

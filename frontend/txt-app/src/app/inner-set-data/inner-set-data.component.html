@@ -1,6 +1,6 @@
 @if(data){
    <h2>{{data.field}}</h2>
-<p>isArray:{{isArray}}</p>
+<!-- <p>isArray:{{isArray}}</p> -->
 @if(isArray){
    @for(field of data.field; track field; let i = $index){
      <!-- albo muszę zrobić dedykowany komponent do arrayów, albo to ręcznie obsłużyć tu, to poniżej nie działa poprawnie -->
